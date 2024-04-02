@@ -1,40 +1,16 @@
 package main
 
 import (
-	"errors"
 	"fmt"
-	"os"
-	"strconv"
+	"realChakrawarti/go-bank/fileops"
 )
 
 const BANK_ACCOUNT_FILE = "balance.txt"
 const DEFAULT_ACCOUNT_BALANCE = 500
 
-func writeBalanceToFile(balance float64) {
-	balanceText := fmt.Sprint(balance)
-	os.WriteFile(BANK_ACCOUNT_FILE, []byte(balanceText), 0644)
-}
-
-func readBalanceFromFile() (float64, error) {
-	data, err := os.ReadFile(BANK_ACCOUNT_FILE)
-
-	if err != nil {
-		return DEFAULT_ACCOUNT_BALANCE, errors.New("server down")
-	}
-
-	balanceText := string(data)
-	balance, err := strconv.ParseFloat(balanceText, 64)
-
-	if err != nil {
-		return DEFAULT_ACCOUNT_BALANCE, errors.New("server is busy. please try again after sometime")
-	}
-
-	return balance, nil
-}
-
 func main() {
 
-	accountBalance, err := readBalanceFromFile()
+	accountBalance, err := fileops.ReadValueFromFile(BANK_ACCOUNT_FILE, DEFAULT_ACCOUNT_BALANCE)
 
 	if err != nil {
 		fmt.Printf("\nError occured while trying to connect to the server: %v", err)
@@ -53,7 +29,7 @@ func main() {
 				continue
 			} else {
 				accountBalance += depositAmount
-				writeBalanceToFile(accountBalance)
+				fileops.WriteValueToFile(accountBalance, BANK_ACCOUNT_FILE)
 				fmt.Printf("Account balance (updated): %0.2f\n", accountBalance)
 			}
 
@@ -68,7 +44,7 @@ func main() {
 				continue
 			} else {
 				accountBalance -= withdrawalAmount
-				writeBalanceToFile(accountBalance)
+				fileops.WriteValueToFile(accountBalance, BANK_ACCOUNT_FILE)
 				fmt.Printf("Account balance (updated): %0.2f\n", accountBalance)
 			}
 
