@@ -3,6 +3,8 @@ package main
 import (
 	"fmt"
 	"realChakrawarti/go-bank/fileops"
+
+	"github.com/brianvoe/gofakeit/v7"
 )
 
 const BANK_ACCOUNT_FILE = "balance.txt"
@@ -15,6 +17,8 @@ func main() {
 	if err != nil {
 		fmt.Printf("\nError occured while trying to connect to the server: %v", err)
 	}
+
+	fmt.Printf("%v", gofakeit.Name())
 
 	for {
 		displayOptions()
@@ -50,6 +54,7 @@ func main() {
 
 		} else if choice == 4 {
 			fmt.Print("Thank you for banking with us!\n")
+			fmt.Printf("You could reach us on %v 24x7!", gofakeit.Phone())
 			break
 		} else {
 			fmt.Print("Invalid choice provided.")
