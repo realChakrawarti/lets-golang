@@ -34,6 +34,12 @@ func (u user) attachCreateAccountToStruct() {
 	fmt.Printf("%v %v | %v\n\n", u.firstName, u.lastName, u.createdAt)
 }
 
+func (u *user) clearNames() {
+	fmt.Println("Clearing first and last name")
+	u.firstName = "-"
+	u.lastName = "-"
+}
+
 func main() {
 	firstName := takeInput("Enter your first name: ")
 	lastName := takeInput("Enter your last name: ")
@@ -47,4 +53,7 @@ func main() {
 	createAccount(guest)
 	createAccountPointer(&guest)
 	guest.attachCreateAccountToStruct()
+	
+	guest.clearNames()
+	createAccount(guest)
 }
