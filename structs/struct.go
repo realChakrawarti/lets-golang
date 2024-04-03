@@ -20,11 +20,18 @@ func takeInput(label string) string {
 }
 
 func createAccount(guest user) {
-	fmt.Printf("%v %v | %v", guest.firstName, guest.lastName, guest.createdAt)
+	fmt.Println("Creating account using struct reference")
+	fmt.Printf("%v %v | %v\n\n", guest.firstName, guest.lastName, guest.createdAt)
 }
 
 func createAccountPointer(g *user) {
-		fmt.Printf("%v %v | %v", (*g).firstName, (*g).lastName, (*g).createdAt)
+	fmt.Println("Creating account using struct pointer")
+	fmt.Printf("%v %v | %v\n\n", (*g).firstName, (*g).lastName, (*g).createdAt)
+}
+
+func (u user) attachCreateAccountToStruct() {
+	fmt.Println("Creating acoount using struct function attachment")
+	fmt.Printf("%v %v | %v\n\n", u.firstName, u.lastName, u.createdAt)
 }
 
 func main() {
@@ -39,4 +46,5 @@ func main() {
 
 	createAccount(guest)
 	createAccountPointer(&guest)
+	guest.attachCreateAccountToStruct()
 }
