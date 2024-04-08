@@ -21,7 +21,15 @@ type outputtable interface {
 }
 
 func printAnything(value interface{}) {
-	fmt.Println(value)
+	intVal, ok := value.(int)
+	if ok {
+		fmt.Println("Integer: ", intVal)
+	}
+
+	strVal, ok := value.(string)
+	if ok {
+		fmt.Println("String: ", strVal)
+	}
 }
 
 func printAny(value any) {
@@ -33,7 +41,6 @@ func printAny(value any) {
 	default:
 		fmt.Println("Default: ", value)
 	}
-	fmt.Println(value)
 }
 
 func main() {
