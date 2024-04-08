@@ -5,14 +5,22 @@ import (
 	"fmt"
 	"os"
 	"realChakrawarti/note/note"
+	"realChakrawarti/note/todo"
 	"strings"
 )
 
 func main() {
 	title, content := getPostData()
+	todoText := takeInput("Enter your todo: ")
 
 	note, err := note.New(title, content)
-
+	
+	if err != nil {
+		fmt.Println(err)
+		return
+	}
+	
+	todo, err := todo.New(todoText)
 	if err != nil {
 		fmt.Println(err)
 		return
@@ -27,6 +35,17 @@ func main() {
 	}
 
 	fmt.Println("Note saved on the disk successfully")
+	
+	todo.Display()
+
+	err = todo.Save()
+
+	if err != nil {
+		fmt.Println("Failed to save the todo on disk")
+		return
+	}
+
+	fmt.Println("Todo saved on the disk successfully")
 
 }
 
