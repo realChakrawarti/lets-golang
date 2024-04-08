@@ -25,6 +25,14 @@ func printAnything(value interface{}) {
 }
 
 func printAny(value any) {
+	switch value.(type) {
+	case int:
+		fmt.Println("Integer: ", value)
+	case string:
+		fmt.Println("String: ", value)
+	default:
+		fmt.Println("Default: ", value)
+	}
 	fmt.Println(value)
 }
 
@@ -60,6 +68,7 @@ func main() {
 	printAnything("Thank you for using notes-cli")
 	currentDataTime := time.Now().Format(time.RFC850)
 	printAny(currentDataTime)
+	printAny(42)
 
 }
 
