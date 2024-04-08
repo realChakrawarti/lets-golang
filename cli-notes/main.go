@@ -9,17 +9,21 @@ import (
 	"strings"
 )
 
+type saver interface {
+	Save() error
+}
+
 func main() {
 	title, content := getPostData()
 	todoText := takeInput("Enter your todo: ")
 
 	note, err := note.New(title, content)
-	
+
 	if err != nil {
 		fmt.Println(err)
 		return
 	}
-	
+
 	todo, err := todo.New(todoText)
 	if err != nil {
 		fmt.Println(err)
@@ -27,26 +31,32 @@ func main() {
 	}
 
 	note.Display()
-	err = note.Save()
+	err = saveData(note)
 
 	if err != nil {
-		fmt.Println("Failed to save the note on disk")
 		return
 	}
 
-	fmt.Println("Note saved on the disk successfully")
-	
 	todo.Display()
 
-	err = todo.Save()
+	err = saveData(todo)
 
 	if err != nil {
-		fmt.Println("Failed to save the todo on disk")
 		return
 	}
 
-	fmt.Println("Todo saved on the disk successfully")
+}
 
+func saveData(data saver) error {
+	err := data.Save()
+
+	if err != nil {
+		fmt.Println("Failed to save on disk")
+		return err
+	}
+
+	fmt.Println("Saved on the disk successfully")
+	return nil
 }
 
 func getPostData() (string, string) {
