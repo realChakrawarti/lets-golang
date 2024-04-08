@@ -7,6 +7,7 @@ import (
 	"realChakrawarti/note/note"
 	"realChakrawarti/note/todo"
 	"strings"
+	"time"
 )
 
 type saver interface {
@@ -17,6 +18,14 @@ type saver interface {
 type outputtable interface {
 	saver
 	Display()
+}
+
+func printAnything(value interface{}) {
+	fmt.Println(value)
+}
+
+func printAny(value any) {
+	fmt.Println(value)
 }
 
 func main() {
@@ -47,6 +56,10 @@ func main() {
 	if err != nil {
 		return
 	}
+
+	printAnything("Thank you for using notes-cli")
+	currentDataTime := time.Now().Format(time.RFC850)
+	printAny(currentDataTime)
 
 }
 
