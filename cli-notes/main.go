@@ -13,6 +13,12 @@ type saver interface {
 	Save() error
 }
 
+// Embedded Interface
+type outputtable interface {
+	saver
+	Display()
+}
+
 func main() {
 	title, content := getPostData()
 	todoText := takeInput("Enter your todo: ")
@@ -30,21 +36,23 @@ func main() {
 		return
 	}
 
-	note.Display()
-	err = saveData(note)
+	err = output(note)
 
 	if err != nil {
 		return
 	}
 
-	todo.Display()
-
-	err = saveData(todo)
+	err = output(todo)
 
 	if err != nil {
 		return
 	}
 
+}
+
+func output(data outputtable) error {
+	data.Display()
+	return saveData(data)
 }
 
 func saveData(data saver) error {
