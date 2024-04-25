@@ -38,6 +38,13 @@ func main() {
 	
 	fmt.Println("Dynamic Slice modified", dynamicSlice)
 
+
+	// Unpacking list values
+	newItems := []float64{2.00, 3.14, 6.28}
+	unpackedValues := append(dynamicSlice, newItems... )
+
+	fmt.Println("Unpacking and appending using js rest-like operator", unpackedValues)
+
 	practice()
 
 }
