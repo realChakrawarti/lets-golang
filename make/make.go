@@ -24,7 +24,7 @@ func main() {
 	// Params - type, preallocate, capacity
 	preAllocateUserNames := make([]string, 2, 5)
 	preAllocateUserNames[0] = "Ram"
-	preAllocateUserNames[1] = "Shayam"
+	preAllocateUserNames = append(preAllocateUserNames, "Shayam")
 
 	fmt.Println("preAllocateUserNames: ", preAllocateUserNames)
 
@@ -45,5 +45,18 @@ func main() {
 	preAllocateCourseRatings["ocaml"] = 4.4
 
 	preAllocateCourseRatings.output("preAllocateCourseRatings")
+
+	// Loops, iterating over array using range
+	fmt.Println("Looping over slice")
+	for idx, value := range preAllocateUserNames {
+		fmt.Println("Index: ", idx)
+		fmt.Println("Value: ", value)
+	}
+
+	fmt.Println("Looping over map")
+	for key, value := range preAllocateCourseRatings {
+		fmt.Println("Key: ", key)
+		fmt.Println("Value: ", value)
+	}
 
 }
