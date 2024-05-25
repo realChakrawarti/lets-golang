@@ -8,8 +8,8 @@ type transformFn func(int) int
 
 func main() {
 	numbers := []int{1, 2, 3, 4, 5}
-	doubled := transformNumbers(&numbers, double)
-	tripled := transformNumbers(&numbers, triple)
+	doubled := transformNumbers(&numbers, getTransformer(2))
+	tripled := transformNumbers(&numbers, getTransformer(3))
 
 	fmt.Println("Doubled: ", doubled)
 	fmt.Println("Tripled: ", tripled)
@@ -23,6 +23,15 @@ func transformNumbers(numberList *[]int, transform transformFn) []int {
 
 	return tNumbers
 
+}
+
+// Return function as value
+func getTransformer(multipler int) transformFn {
+	if multipler == 2 {
+		return double
+	} else {
+		return triple
+	}
 }
 
 func double(val int) int {
