@@ -31,19 +31,14 @@ func transformNumbers(numberList *[]int, transform transformFn) []int {
 
 }
 
-// Return function as value
-func getTransformer(multipler int) transformFn {
-	if multipler == 2 {
-		return double
-	} else {
-		return triple
+// Factory pattern + Closure
+func createTransformer(factor int) transformFn {
+	return func(number int) int {
+		return number * factor
 	}
 }
 
-func double(val int) int {
-	return val * 2
-}
-
-func triple(val int) int {
-	return val * 3
+// Return function as value
+func getTransformer(multipler int) transformFn {
+	return createTransformer(multipler)
 }
