@@ -11,8 +11,14 @@ func main() {
 	doubled := transformNumbers(&numbers, getTransformer(2))
 	tripled := transformNumbers(&numbers, getTransformer(3))
 
+	// Anonymous function - One of use, not named, code colocation
+	squared := transformNumbers(&numbers, func(num int) int {
+		return num * num
+	})
+
 	fmt.Println("Doubled: ", doubled)
 	fmt.Println("Tripled: ", tripled)
+	fmt.Println("Squared: ", squared)
 }
 
 func transformNumbers(numberList *[]int, transform transformFn) []int {
