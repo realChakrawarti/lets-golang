@@ -27,6 +27,10 @@ func main() {
 	sumNumbers := []int{1, 2, 3, 4, 5, 6, 7, 8, 9}
 	fmt.Println("Sum of numbers: ", other.Sumup(sumNumbers))
 	fmt.Println("Sum of numbers | Variadic: ", other.VariadicSumup(1, 2, 3, 4, 5, 6, 7, 8, 9))
+
+	// Slice into standalone parameter values
+
+	fmt.Println("Sum of numbers | Split slice into params: ", other.VariadicSumup(1, sumNumbers...))
 }
 
 func transformNumbers(numberList *[]int, transform transformFn) []int {
