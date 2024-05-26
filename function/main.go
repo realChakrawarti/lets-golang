@@ -1,6 +1,9 @@
 package main
 
-import "fmt"
+import (
+	"fmt"
+	"realChakrawarti/function/other"
+)
 
 type transformFn func(int) int
 
@@ -19,6 +22,11 @@ func main() {
 	fmt.Println("Doubled: ", doubled)
 	fmt.Println("Tripled: ", tripled)
 	fmt.Println("Squared: ", squared)
+
+	fmt.Println("Factorial of 5 | Recursion: ", other.Factorial(5))
+	sumNumbers := []int{1, 2, 3, 4, 5, 6, 7, 8, 9}
+	fmt.Println("Sum of numbers: ", other.Sumup(sumNumbers))
+	fmt.Println("Sum of numbers | Variadic: ", other.VariadicSumup(1, 2, 3, 4, 5, 6, 7, 8, 9))
 }
 
 func transformNumbers(numberList *[]int, transform transformFn) []int {
