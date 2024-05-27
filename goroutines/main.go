@@ -5,8 +5,9 @@ import (
 	"time"
 )
 
-func greet(message string) {
+func greet(message string, greetDoneChan chan bool) {
 	fmt.Println(message)
+	greetDoneChan <- true
 }
 
 func iterate(value uint64, iterateDoneChan chan bool) {
@@ -30,19 +31,24 @@ func iterate(value uint64, iterateDoneChan chan bool) {
 	iterateDoneChan <- true
 }
 
-func slowGreet(message string, slowGreetDoneChan chan bool) {
+func slowGreet(message string, greetDoneChan chan bool) {
 	time.Sleep(3 * time.Second)
 	fmt.Println(message)
-	slowGreetDoneChan <- true
+	greetDoneChan <- true
+	// Closes the channel when its not needed anymore
+	// Sending on closed channel throws -> panic: send on closed channel
+	close(greetDoneChan)
 }
 
 func main() {
-	greet("AI: Hello, how are you?")
 	iterateDone := make(chan bool)
-	slowGreetDone := make(chan bool)
+	greetDone := make(chan bool)
+	// Re-use the same channel but this order doesn't matter
+	go greet("AI: Hello, how are you?", greetDone)
+	go greet("Me: Who do you think you are!", greetDone)
 	// iterate(18446744073709551615)
 	go iterate(10000000000, iterateDone)
-	go slowGreet("Me: Great!", slowGreetDone)
-	<-slowGreetDone
+	go slowGreet("Me: Great!", greetDone)
+	<-greetDone
 	<-iterateDone
 }
