@@ -1,0 +1,9 @@
+POST http://localhost:42069/events
+Content-Type: application/json
+
+{
+    "name": "Test Event",
+    "description": "A test Event",
+    "location": "A test location",
+    "dateTime": "{{$datetime iso8601}}"
+}
