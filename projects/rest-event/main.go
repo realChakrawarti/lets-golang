@@ -2,12 +2,16 @@ package main
 
 import (
 	"net/http"
+	"realChakrawarti/rest-event/db"
 	"realChakrawarti/rest-event/models"
 
 	"github.com/gin-gonic/gin"
 )
 
 func main() {
+
+	db.InitDb()
+
 	server := gin.Default()
 
 	// Setup handler, GET, POST, PUT, PATCH, DELETE
@@ -18,7 +22,14 @@ func main() {
 }
 
 func getEvents(context *gin.Context) {
-	events := models.GetAllEvents()
+	events, err := models.GetAllEvents()
+
+	if err != nil {
+		context.JSON(http.StatusInternalServerError, gin.H{
+			"message": "Could not find events. Please try again after sometime!",
+		})
+	}
+
 	context.JSON(http.StatusOK, events)
 }
 
@@ -36,7 +47,14 @@ func createEvent(context *gin.Context) {
 	event.ID = 1
 	event.UserID = 1
 
-	event.Save()
+	err = event.Save()
+
+	if err != nil {
+		context.JSON(http.StatusInternalServerError, gin.H{
+			"message": "Could not create the event. Please try again after sometime",
+		})
+		return
+	}
 
 	context.JSON(http.StatusCreated, gin.H{
 		"message": "Event created",
