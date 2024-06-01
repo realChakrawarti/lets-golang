@@ -1,0 +1,9 @@
+PUT http://localhost:42069/events/1
+Content-Type: "application/json"
+
+{
+    "name": "Updated Event",
+    "description": "A test Event updated",
+    "location": "A test location updated",
+    "dateTime": "{{$datetime iso8601}}"
+}
