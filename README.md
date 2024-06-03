@@ -12,7 +12,7 @@ Package Discovery: https://pkg.go.dev/
 
 - go get: Downloads the raw source code of someone else's package
 
--go test: Runs any tests associated with the current project
+- go test: Runs any tests associated with the current project
 
 ### Types of packages
 
@@ -24,4 +24,7 @@ Package Discovery: https://pkg.go.dev/
 - Executable file should have a function named `main`
 
 - "fmt" library is used to format or used for debugging, -- golang.org/pkg
+
+
+Followed: https://www.udemy.com/course/go-the-complete-guide and finished on 04th June 2024
 
