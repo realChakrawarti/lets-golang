@@ -1,5 +1,6 @@
-PUT http://localhost:42069/events/1
+PUT http://localhost:42069/events/4
 Content-Type: "application/json"
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InRlc3QxQGV4YW1wbGUuY29tIiwiZXhwIjoxNzE3NDQ0MDA1LCJ1c2VySWQiOjJ9.un4mH5QR5-mYvB9_VkeiBUzJrG-fftWVwpOLuKEFka8
 
 {
     "name": "Updated Event",
