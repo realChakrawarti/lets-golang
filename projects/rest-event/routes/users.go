@@ -1,6 +1,7 @@
 package routes
 
 import (
+	"log"
 	"net/http"
 	"realChakrawarti/rest-event/models"
 	"realChakrawarti/rest-event/utils"
@@ -43,6 +44,7 @@ func login(context *gin.Context) {
 		context.JSON(http.StatusBadRequest, gin.H{
 			"message": "Couldn't parse request data",
 		})
+		log.Fatal(err)
 		return
 	}
 
